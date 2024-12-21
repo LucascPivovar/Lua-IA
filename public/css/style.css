@@ -1,0 +1,847 @@
+* {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden; /* Previne barras de rolagem horizontais */
+    box-sizing: border-box;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+}
+
+html {
+    scroll-behavior: smooth;
+    height: 300vh;
+}
+
+h1 {
+    white-space: nowrap; /* Impede que o texto quebre para a próxima linha */
+    overflow: hidden; /* Esconde o texto que ultrapassar os limites do contêiner */
+    text-align: center; /* Centraliza o texto */
+    margin: 0 auto; /* Remove margens extras e centraliza */
+    padding: 0; /* Remove preenchimento */
+}
+
+/* Modal Styles */
+.modal {
+    display: none; /* Oculto por padrão */
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    overflow: none;
+}
+
+.modal h2 {
+    font-size: 1.5rem;
+    margin-bottom: 20px;
+    color: #333;
+    font-weight: 700;
+    font-style: italic;
+}
+
+label {
+    display: block;
+    margin-bottom: -10px;
+    font-weight: 700;
+    color: #333;
+    margin-top: 5px;
+}
+
+.modal-content {
+    background-color: #adacac;
+    margin: auto;
+    padding: 20px;
+    width: 90%;
+    max-width: 500px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    margin-top: 20rem;
+}
+
+.modal-header {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+.modal-close {
+    color: #aaa;
+    float: right;
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close-btn {
+    font-size: 1.5rem;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.modal-close:hover {
+    color: #000;
+    cursor: pointer;
+}
+
+.modal input[type="text"],
+.modal input[type="email"],
+.modal input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    background-color: #dedede;
+    border-radius: 5px;
+    box-sizing: border-box;
+    border: none;
+    outline: none;
+    
+}
+
+.modal button {
+    background-color: #FF5374;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 30%;
+    padding: 10px;
+    border-radius: 50px;
+    font-size: 1rem;
+    margin-top: 10px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.modal button:hover {
+    background-color: #b74485;
+}
+
+.modal .recaptcha-container {
+    margin: 15px 0;
+}
+
+/* Reutilização de estilos para modal */
+.modal-login .modal-header {
+    color: #444;
+}
+
+.modal-register .modal-header {
+    color: #555;
+}
+
+/* Estilos para sobreposição ao fundo do modal */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}
+
+/* Botões no rodapé do modal */
+.modal-footer {
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    
+    overflow: none;
+}
+
+.modal-footer button {
+    flex: 1;
+    margin: 0 5px;
+    overflow: none;
+}
+
+
+.modal-footer .btn-link {
+    background: none;
+    color: #b4d8ff;
+    text-decoration: underline;
+    border: none;
+    cursor: pointer;
+}
+
+#open-register {
+    color: #0556ac;
+    text-decoration: underline;
+    border: none;
+    cursor: pointer;
+}
+
+#open-register:hover {
+    color: #033f7e;
+}
+
+.modal-footer .btn-link:hover {
+    color: #3e78b6;
+}
+
+.home {
+    font-family: 'Poppins', sans-serif;
+    background-image: url('../assets/bg.webp');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    width: 100vw;
+    margin: 0;
+    background-attachment: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+.home::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.8); /* Cor preta com 50% de opacidade */
+    z-index: 2;
+}
+
+
+.content {
+    position: relative;
+    z-index: 2; /* Garante que o conteúdo fique acima do fundo */
+    color: white;
+    text-align: center;
+}
+
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    color: white;
+    z-index: 1000;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+.header.hidden {
+    transform: translateY(-100%);
+    opacity: 0;
+    pointer-events: none;
+}
+
+.header:hover {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+}
+
+.header:hover {
+    opacity: 1; /* Reaparece no hover */
+    pointer-events: auto; /* Ativa interações no hover */
+}
+
+.header img {
+    width: 100px;
+
+    flex-shrink: 0; /* Garante que a logo não diminua em telas menores */
+}
+
+.nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 23px;
+    font-weight: bold;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    margin: 0 20px;
+    transition: all 0.3s ease-in-out;
+}
+
+
+.header a:hover {
+    color: #888888;
+}
+
+#login-btn {
+    background-color: rgba(92, 91, 91, 0.8); /* Preto com 80% de opacidade */
+    color: #fff;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    width: 10rem;
+    font-size: 1rem;
+    position: relative;
+    right: 1rem;
+    overflow: hidden;
+    text-align: center;
+}
+
+
+#login-btn:hover {
+    background-color: #242323;
+    color: #fff;
+
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.main h1 {
+    font-size: 50px;
+    font-style: italic;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-top: 12rem;
+}
+
+.main p {
+    font-size: 25px;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+
+.main button {
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 50px;
+    cursor: pointer;    
+    background: none;
+    border: white solid 4px;
+    width: 30rem;
+    margin-top: 2rem;
+    font-size: 1.5rem;
+    height: 5rem;
+}
+
+.main button:hover {
+    background-color: #242323;
+}
+
+#plataforma {
+    background-color: #0D0D0D;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#plataforma h1 {
+    font-size: 3rem;
+    font-style: italic;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-top: 10rem;
+    margin-bottom: 4rem;
+    color: white;
+    text-align: center;	
+}
+
+#plataforma .text {
+    text-align: center;
+    color: white;
+    padding: 10px;
+    font-size: 1.6rem;
+    opacity: 0.8;
+    margin-right: 5rem;
+    
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:center;
+    padding: 20px;
+
+}
+
+.images {
+    position: relative; /* Permite posicionar elementos dentro da div */
+    width: 500px; /* Largura fixa para a div */
+    height: 300px; /* Altura fixa para a div */
+    overflow: hidden; /* Garante que nada saia da div */
+    display: flex;
+    justify-content: center;
+}
+.images img {
+    position: relative; /* Posicionamento normal para animação */
+    width: 10rem; /* Tamanho inicial das imagens */
+    height: 12rem;
+    object-fit: cover; /* Mantém a qualidade dentro da div */
+    animation: scale-image 10s infinite ease-in-out; /* Animação de aumento e redução de tamanho */
+}
+    
+@keyframes scale-image {
+    0% {
+        transform: scale(0.8); /* Tamanho normal */
+    }
+    50% {
+        transform: scale(0.9); /* Aumenta para 150% */
+    }
+    100% {
+        transform: scale(0.8); /* Volta ao tamanho original */
+    }
+}
+
+#duck {
+    width: 200px;
+    position: relative;
+    left: 5rem;
+    top: 5rem;
+}
+
+#girl {
+    width: 200px;
+}
+
+#galery {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #0D0D0D;
+}
+
+#galery h2 {
+    font-size: 3rem;
+    font-style: italic;
+    margin-bottom: 20px;
+    font-weight: bold;
+    margin-bottom: 4rem;
+    color: white;
+}
+
+.frame1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    
+    gap: 30px;
+}
+
+.frame2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 30px;
+    gap: 30px;
+}
+
+.frame1 img {
+    width: 10rem;
+    height: 10rem;
+}
+
+.frame2 img {
+    width: 10rem;
+    height: 10rem;
+}
+
+#use {
+    height: 100vh;
+    display: flex;    
+    align-items: center;
+    flex-direction: column;
+    background-color: #0D0D0D;
+    color: white;
+    justify-content: center;
+}
+
+#use h2 {
+    font-size: 5rem;
+    font-style: italic;
+    font-weight: bold;
+}
+
+#use p {
+    font-size: 2rem;
+    margin-bottom: 5rem;
+}
+
+#gerador-ia {
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #0f0f0f;
+    overflow: hidden;
+}
+
+#image-container {
+    width: 100%; /* Largura total do contêiner */
+    max-width: 800px; /* Limita a largura máxima da imagem */
+    height: auto;
+    max-height: 600px;
+    margin: 20px auto; /* Centraliza a imagem */
+    text-align: center; /* Garante alinhamento no centro */
+    overflow: hidden; /* Remove qualquer conteúdo que ultrapasse o contêiner */
+}
+
+#image-container img {
+    max-width: 100%; /* Garante que a imagem não ultrapasse o contêiner */
+    height: auto; /* Mantém a proporção da imagem */
+    max-height: 800px;
+    border-radius: 10px; /* Deixa a imagem com bordas arredondadas */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Adiciona um sombreamento elegante */
+}
+
+#gerador-ia h2 {
+    font-size: 2rem;
+    font-style: italic;
+    margin-bottom: 40px;
+    font-weight: bold;
+    color: white;
+}
+
+
+.container-two p {
+    font-size: 1.2rem;
+    color: white;
+}
+.container-two {
+    width: 30rem;
+    height: auto;
+    max-width: 600px;
+    text-align: center;
+    padding: 20px;
+    background: #393939;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+textarea {
+    resize: none;
+    background-color: #9c9b9b;
+    color: white;
+    font-size: 1.2rem;
+}
+
+textarea::placeholder {
+    color: rgb(72, 70, 70);
+}
+
+textarea, select {
+    width: 100%;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    resize: none;
+    background-color: #9c9b9b;
+    color: rgb(255, 255, 255);
+}
+
+
+
+button {
+    background-color: #FF5374;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 10rem;
+    height: 2rem;
+    border-radius: 50px;
+}
+
+#remove-btn {
+    background-color: #FF5374;
+    color: white;
+    border: none;
+    cursor: pointer;
+    width: 10rem;
+    height: 2rem;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+button:hover {
+    background-color: #b74485;
+}
+
+#image-container img {
+    margin-top: 20px;
+    max-width: 100%;
+    border-radius: 5px;
+}
+
+#loading-message {
+    display: none; /* Oculta o contêiner por padrão */
+    text-align: center;
+}
+
+
+#image-container img {
+    max-width: 100%;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+}
+
+#loading-gif {
+    max-width: 100px;
+    height: auto;
+}
+
+#footer {
+    background-color: #0D0D0D;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+
+#footer p {
+    font-size: 1.2rem;
+    margin-bottom: 0;
+}
+
+@media screen and (max-width: 780px) {
+    .header {
+        height: 5rem;
+    }
+
+    .header img {
+        width: 5rem;
+    }
+
+    .header a {
+        font-size: 0.6rem;
+        display: flex;
+    }
+
+    .nav {
+        display: none;
+    }
+
+    #login-btn {
+        font-size: 0.8rem;
+        right: 1rem;
+        overflow: hidden;
+        text-align: center;
+        width: 6rem;
+    }
+
+    #home {
+        height: 100vh;
+        width: 100vw;
+    }
+
+    #home h1{
+        font-size: 2rem;
+        text-align: center;
+        margin-top: 0;
+    }
+
+    #home p {
+        font-size: 1rem;
+    }
+
+    #home button {
+        font-size: 1.2rem;
+        width: 20rem;
+    }
+
+    #plataforma {
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+    }
+
+    #plataforma h1 {
+        font-size: 1.3rem;
+    }
+
+    #plataforma .text {
+        font-size: 1.3rem;
+        text-align: center;
+        margin-right: 0.5rem;
+    }
+
+    .images {
+        align-items: center;
+        margin-right: 3rem;
+    }
+
+    #galery {
+        height: 120vh;
+        width: 100vw;
+        text-wrap: wrap;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+
+
+    }
+
+    #galery h2 {
+        font-size: 1.5rem;
+        margin-top: -5rem;
+        text-align: center;
+    }
+
+    #um{ 
+        display: none;
+     }
+
+    #dois{
+        display: none;
+     }
+    
+    .frame1 {
+        display: flex;
+        flex-direction: column;
+
+        gap: 1rem;
+
+    }
+
+    .frame2 {
+        display: none;
+
+    }
+
+
+    #use {
+        height: 100vh;
+       
+    }
+
+    #use h2 {
+        font-size: 3rem;
+        margin-bottom: 2rem;
+       
+    }   
+
+    #use p{
+        font-size: 1.2rem;  
+        margin-bottom: 1rem;
+        text-wrap: wrap;
+        margin: 1.8rem;
+    }
+
+    #gerador-ia {
+        height: 100vh;
+       
+    }
+
+    .container-two {
+        width: 90%;
+
+    }
+}
+
+@media screen and (max-width: 400px) {
+    #plataforma {
+        height: 100vh;
+    }
+
+
+    #plataforma h1 {
+        font-size: 1.2rem;
+        margin-bottom: -5px;
+    }
+
+    #plataforma .text {
+        font-size: 0.9rem;
+        overflow: hidden;
+        height: 50%;
+        margin-top: none;
+        margin-bottom: -5rem;
+
+    }
+
+    #images {
+        width: 100%;
+        height: 100%;
+        
+    }
+
+
+    #duck, #girl {
+        width: 9rem;
+        height: 9rem;
+    }
+
+    #galery {
+        height: 100vh;
+    }
+
+    #galery h2 {
+        font-size: 1.3rem;
+        margin-top: 7rem;
+    }
+
+    #galery img {
+        width: 8rem;
+        height: auto;
+    }
+
+    #use {
+        height: 100vh;
+    }
+
+    #use h2 {
+        font-size: 2rem;
+    }
+
+    #use p {
+        font-size: 1.1rem;
+    }
+
+    #gerador-ia {
+        height: 100vh;
+        font-weight: 700;
+    }
+
+    .container-two {        
+        width: 90%;
+        height: auto;
+    }   
+
+    .container-two h2 {        
+        font-size: 1.6rem;
+        color: white;
+        margin-bottom: 0.8rem;
+    }
+
+
+    .container-two p {
+        font-size: 1rem;
+    }
+
+    
+}

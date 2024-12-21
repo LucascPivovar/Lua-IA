@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lua IAs</title>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="shortcut icon" type="imagex/png" href="./assets/lua.png">
+</head>
+<body>
+    <div class="header">
+        <a href="#home"><img src="./assets/Logo.png" alt="Logo"></a>
+        <div class="nav">
+            <a href="#plataforma">Plataforma</a>
+            <a href="#use">Como usar</a>
+            <a href="#gerador-ia">Gerador IA</a>
+        </div>
+        <button id="login-btn">Faça login</button>
+    </div>
+
+
+    <!-- Modal de Login -->
+    <div id="login-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="close-login">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <label for="login-email">E-mail:</label>
+                <input type="email" id="login-email" placeholder="Digite seu e-mail" required autofocus>
+
+                <label for="login-password">Senha:</label>
+                <input type="password" id="login-password" placeholder="Digite sua senha" required>
+
+                <div class="g-recaptcha" data-sitekey="SUA_SITE_KEY"></div>
+
+                <button type="submit" id="logi">Entrar</button>
+            </form>
+            <p>Não tem uma conta? <a href="#" id="open-register">Cadastre-se</a></p>
+        </div>
+    </div>
+
+    <!-- Modal de Cadastro -->
+    <div id="register-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close-btn" id="close-register">&times;</span>
+            <h2>Cadastro</h2>
+            <form id="register-form">
+                <label for="register-email">E-mail:</label>
+                <input type="email" id="register-email" placeholder="Digite seu e-mail" required>
+
+                <label for="register-password">Senha:</label>
+                <input type="password" id="register-password" placeholder="Digite sua senha" required>
+
+                <label for="confirm-password">Confirmar Senha:</label>
+                <input type="password" id="confirm-password" placeholder="Confirme sua senha" required>
+
+                <div class="g-recaptcha" data-sitekey="SUA_SITE_KEY"></div>
+
+                <button type="submit">Cadastrar</button>
+            </form>
+        </div>
+    </div>
+
+
+    <section class="home" id="home">
+        <div class="content">
+
+            <div class="main">
+                <h1>Lua IAs</h1>
+                <p>Seu Gerador de Imagens Incríveis "Descubra a magia da inteligência <br> artificial na criação de imagens únicas e deslumbrantes. Com Lua IAs, <br> dê vida às suas ideias e veja o futuro da arte visual."</p>
+                <a href="#gerador-ia"><button>Gere sua imagem usando IA</button></a>
+            </div>
+        </div>
+    </section>
+    <section id="plataforma">
+        <h1>Crie diversas imagens utilizando a <br>Inteligência Artificial</h1>
+        <div class="container">
+            <div class="text">
+                <p>Seja para projetos criativos, designs, <br> ilustrações ou apenas para dar vida à <br>sua imaginação, nossa plataforma é <br>rápida, intuitiva e oferece resultados <br>impressionantes. Experimente e <br>descubra como é fácil transformar <br>palavras em imagens incríveis!"</p>
+            </div>
+            <div class="images">
+                <img src="./assets/duck.png" alt="" id="duck">
+                <img src="./assets/girl.png" alt="" id="girl">
+            </div>
+        </div>
+    </section>
+
+    <section id="galery">
+        <h2>Algumas imagens criadas pela plataforma</h2>
+        <div class="frame1">
+            <img src="./assets/galery/1.png" alt="">
+            <img src="./assets/galery/2.png" alt="">
+            <img src="./assets/galery/3.png" alt="" id="um">
+            <img src="./assets/galery/4.png" alt="" id="dois">
+            <img src="./assets/galery/5.png" alt="">
+        </div>
+        <div class="frame2">
+            <img src="./assets/galery/6.png" alt="">
+            <img src="./assets/galery/7.png" alt="">
+            <img src="./assets/galery/8.png" alt="">
+            <img src="./assets/galery/9.png" alt="">    
+            <img src="./assets/galery/10.png" alt="">
+        </div>
+    </section>
+
+    <section id="use">
+        <h2>Como usar</h2>
+        
+
+        <p>Descreva sua ideia com detalhes, incluindo o objeto principal, o cenário <br>onde a cena ocorre e a ação que está acontecendo. Especifique o estilo <br>artístico desejado, as cores predominantes, o tipo de iluminação e <br>qualquer detalhe adicional que complemente a cena. Por fim, defina o <br>formato da imagem. Quanto mais precisa e detalhada for a descrição,<br> mais personalizado será o resultado.</p>
+    </section>
+
+    <section id="gerador-ia">            
+        <div class="container-two">
+            <h2 class="text-title">Gere imagens com IA</h2>
+            <p>Abaixo escreva a descrição da sua imagem</p>
+            <textarea id="prompt" placeholder="Escreva a descrição da sua imagem"></textarea>
+            <p>Escolha o estilo da sua imagem</p>
+            <select id="style">
+                <option value="1">Synthwave</option>
+                <option value="2">Ukiyoe</option>
+                <option value="3">No Style</option>
+                <option value="4">Steampunk</option>
+                <option value="5">Fantasy Art</option>
+                <option value="6">Vibrant</option>
+                <option value="7">HD</option>
+                <option value="8">Pastel</option>
+            </select>
+            <button id="generate-btn">Gerar Imagem</button>
+            <!-- Contêiner para a imagem gerada -->
+            <div id="image-container"></div>
+
+            <!-- GIF de carregamento -->
+            <div id="loading-message" style="display: none; text-align: center;">
+                <img id="loading-gif" src="./assets/loader.gif" alt="Carregando...">
+            </div>
+
+            <button id="remove-btn" style="display: none;">Criar Novamente</button>
+            <button id="save-btn" style="display: none;">Salvar</button>
+
+        </div>
+    </section>
+    
+    <section id="footer">
+        <p>© 2024 - Desenvolvido por Lucas Caetano Pivovar</p>
+        <p>Todos os direitos reservados.</p>
+    </section>
+    <script src="./script/modal.js"></script>
+    <script src="./script/login.js"></script>
+    <script src="./script/generate.js"></script>
+    <script src="./script/header.js"></script>
+    <script src="./script/scroll.js"></script>
+    <script src="./script/register.js"></script>
+</body>
+</html>
