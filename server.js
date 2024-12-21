@@ -5,16 +5,12 @@ const session = require('express-session');
 const sqlite3 = require('sqlite3').verbose();
 
 const app = express();
-const PORT = 3000;
 const dreamKey = "zbvJsKo8komGQe3J9zB9nWNn4FqGvSQx";
 
 // Configuração do banco de dados SQLite
 const db = new sqlite3.Database('./users.db', sqlite3.OPEN_READWRITE | sqlite3.OPEN_CREATE, (err) => {
-    if (err) {
-        console.error('Erro ao criar/conectar ao banco de dados:', err.message);
-    } else {
-        console.log('Banco de dados conectado com sucesso.');
-    }
+    if (err) console.error('Erro ao criar/conectar ao banco de dados:', err.message);
+    else console.log('Banco de dados conectado com sucesso.');
 });
 
 // Criação da tabela de usuários
@@ -140,7 +136,5 @@ app.post('/generate', isAuthenticated, async (req, res) => {
     }
 });
 
-// Inicia o servidor
-app.listen(PORT, () => {
-    console.log(`Servidor rodando em http://localhost:${PORT}`);
-});
+// Exporta o servidor para o Vercel
+module.exports = app;
